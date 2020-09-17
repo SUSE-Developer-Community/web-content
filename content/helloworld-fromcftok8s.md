@@ -10,5 +10,28 @@ But I assume I'm not alone in this. No matter how proficient you are with Kubern
 
 So let me take you with me on this journey. 
 
-# The Starting Point
+# Where am I and where do I want to go?
 
+Python hello world app from CAP Sandbox GSG. Can push to CF with a simple cf push. 
+
+Goal: build it into a container, push to docker hub, deploy to Kubernetes. See what it takes and what obstacles I need to overcome. 
+
+Started to search for articles on this but only found ones that describe how to put something into a docker container and also run it via docker, or I found examples how to pull down an image from docker hub and run it on k8s. I did not find a good article that put these two steps together. 
+
+# Step 1: build a container and push to Docker hub
+
+Dockerfile. 
+
+Which base image? How do I choose the right base image for me? What options do I have?
+
+Building container. tag it. Upload it. How the latest tag works. 
+
+# Step 2: deploying to kubernetes
+
+create a deployment yaml. apply/create it. Explain what happens. Why this is not sufficient. Further reading resources for those who want to understand the details of what a pod, replicaset, deployment is. 
+
+# Step 3: making it reachable
+
+Create service. reconfigure VM so that it becomes reachable (Private network). 
+
+Some future work pointers (MetalLB). 
