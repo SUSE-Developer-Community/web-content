@@ -15,7 +15,7 @@ My preferred way to build my container images is with [Buildah](https://buildah.
 
 Note: I'll probably be using "container" and "container image" interchangeably. It should be obvious from context what I mean.
 
-Bulidah uses the standard CRI set of tooling and configuration which means that it runs very nicely along side CRI-O, Podman, and Skopeo making for a full (mostly drop in) replacement for Docker.
+Buildah uses the standard CRI set of tooling and configuration which means that it runs very nicely along side CRI-O, Podman, and Skopeo making for a full (mostly drop in) replacement for Docker.
 
 # What is a Container (simply)
 
@@ -67,12 +67,15 @@ The first thing we will do is build a new container to deploy. This is done in a
 
 NOTE: Most times these scripts would be written into a bash script. So, while this looks complicated, it’s only moderately more work than using a dockerfile and the increase in security, flexibility, and transfer speeds make up for the extra complexity.
 
+## Base Layer
+
 Create the base layer and hold on to the name for later steps.
+
+For ease of instruction we will start with a SUSE specific base layer (which I implicitly trust, as I work there!). For smaller containers, you can use `buildah from scratch` to start with an empty layer.
 
 ```bash
 ctr=$(buildah from "${1:-registry.suse.com/suse/sle15}")
 ```
-
 
 NOTE: For most scripts it’s easier to just capture it in the first step and just use it as a variable but the value stored here
 can be found as the Container ID in the output of:
@@ -81,11 +84,14 @@ can be found as the Container ID in the output of:
 buildah containers
 ```
 
-Now that we have the base layers of the container, let’s add to it. There are two ways to go about this: 
-- Mount the container filesystem and use zypper to install into it
-- Run zypper from inside the container
+## Installing packages
 
-Both of these options have their time and place. To me, dealing with zypper from inside the container comes with a lot of
+Now that we have the base layers of the container, let’s add to it. There are two ways to go about this: 
+- Mount the container filesystem and use zypper (or any package manager) to install into it
+- Run zypper (or any package manager) from inside the container
+- Copy only relevant files into the right directory
+
+Each of these options have their time and place. To me, dealing with zypper from inside the container comes with a lot of
 extra bloat due to the need for copying in your service and repo files from the host. In my opinion, mounting the filesystem
 can give a much more streamlined experience.
 
@@ -104,6 +110,7 @@ This location can be used by zypper as an alternate install root. Let’s instal
 ```bash
 zypper --installroot $ctr_wd -n install nginx
 ```
+
 
 We need to do a little config to run this securely in a container.
 
@@ -136,6 +143,7 @@ http {
 }
 ```
 
+## Adding Manifest
 
 Lastly for this step, we need to add some config into the container manifest so it knows what to run when started. This is done with:
 
@@ -143,23 +151,52 @@ Lastly for this step, we need to add some config into the container manifest so 
 buildah config --entrypoint '["/usr/sbin/nginx","-c","/app/nginx.conf",”-p”,”/app/”]' $ctr
 ```
 
+## Committing Layer
+
 With those changes, we can commit, create a new layer, and remount it with the following sequence of commands:
 
 ```bash
 image=$(buildah commit --rm $ctr my_nginx)
 ctr=$(buildah from $image)
 ctr_wd=$(buildah mount $ctr)
+
 ```
 
-Now, with the new layer built and mounted, let’s add some content to host into it:
+## Adding content
+
+Now, with the new layer built and mounted, let’s add a Hello World to host into it:
 
 ```bash
 mkdir $ctr_wd/app/srv
 echo “Hello, World!” > $ctr_wd/app/srv/index.html
 ```
 
+## Committing Final Layer
+
 Let’s commit that container for us to run:
 
 ```bash
 buildah commit $ctr my_nginx
 ```
+
+
+## Running Container Locally
+
+Now that the container is created, we can run it locally using `podman` with:
+
+```bash
+podman run -p 8080:8080 my_nginx TODO
+```
+
+## Pushing Your Container Image
+
+Finally, let's publish our new container to a registry!
+
+We can use Skopeo to do this:
+
+```bash
+skopeo copy TODO
+```
+
+
+
