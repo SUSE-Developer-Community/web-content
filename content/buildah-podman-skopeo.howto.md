@@ -64,62 +64,102 @@ sudo sh -c 'echo `whoami`:100000:100001 >> /etc/subgid'
 # Building the Container
 
 The first thing we will do is build a new container to deploy. This is done in a few steps.
-NOTE: Most times these scripts would be written into a bash script. So, while this looks complicated, it’s only moderately
-more work than using a dockerfile and the increase in security, flexibility, and transfer speeds make up for the extra
-complexity.
-Create the base layer and hold on to the name for later steps
-$ ctr=$(buildah from "${1:-registry.suse.com/suse/sle15}")
+
+NOTE: Most times these scripts would be written into a bash script. So, while this looks complicated, it’s only moderately more work than using a dockerfile and the increase in security, flexibility, and transfer speeds make up for the extra complexity.
+
+Create the base layer and hold on to the name for later steps.
+
+```bash
+ctr=$(buildah from "${1:-registry.suse.com/suse/sle15}")
+```
+
+
 NOTE: For most scripts it’s easier to just capture it in the first step and just use it as a variable but the value stored here
 can be found as the Container ID in the output of:
-$ buildah containers
-Now that we have the base layers of the container, let’s add to it. There are two ways to go about this: mount the
-container filesystem and use zypper to install into it, or run zypper from inside the container.
+
+```bash
+buildah containers
+```
+
+Now that we have the base layers of the container, let’s add to it. There are two ways to go about this: 
+- Mount the container filesystem and use zypper to install into it
+- Run zypper from inside the container
+
 Both of these options have their time and place. To me, dealing with zypper from inside the container comes with a lot of
 extra bloat due to the need for copying in your service and repo files from the host. In my opinion, mounting the filesystem
 can give a much more streamlined experience.
+
 Note: Read this blog by Jason Evans about how to build images with zypper inside the container.
+
 This is done with:
-$ ctr_wd=$(buildah mount $ctr)
-The stored output tells you where this container filesystem is located.
-This location can be used by zypper as an alternate install root. Let’s install nginx (and it’s dependencies) to this container
-with:
-$ zypper --installroot $ctr_wd -n install nginx
+
+```bash
+ctr_wd=$(buildah mount $ctr)
+```
+
+The stored output tells you where to find the root of the container's filesystem.
+
+This location can be used by zypper as an alternate install root. Let’s install nginx (and it’s dependencies) to this container with:
+
+```bash
+zypper --installroot $ctr_wd -n install nginx
+```
+
 We need to do a little config to run this securely in a container.
-Create a new file at $ctr_wd/app/nginx.conf and add the following content. This listens on port 8080 as an executable
-hosting files from /app/srv.
+
+Create a new file at $ctr_wd/app/nginx.conf and add the following content. This listens on port 8080 as an executable hosting files from /app/srv.
+
+```nginx.conf
 worker_processes 1;
 error_log stderr;
 daemon off;
-pid
- nginx.pid;
+pid nginx.pid;
+
 events {
-worker_connections 1024;
+  worker_connections 1024;
 }
+
 http {
-include
- /etc/nginx/mime.types;
-default_type application/octet-stream;
-sendfile
- on;
-keepalive_timeout 65;
-server {
-listen
- 8080;
-location / {
-root /app/srv/;
-index index.html index.htm;
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
+  sendfile on;
+  keepalive_timeout 65;
+
+  server {
+    listen 8080;
+  
+    location / {
+      root /app/srv/;
+      index index.html index.htm;
+    }
+  }
 }
-}
-}
-Lastly for this step, we need to add some config into the container manifest so it knows what to run when started. This is
-done with:
-$ buildah config --entrypoint '["/usr/sbin/nginx","-c","/app/nginx.conf",”-p”,”/app/”]' $ctr
+```
+
+
+Lastly for this step, we need to add some config into the container manifest so it knows what to run when started. This is done with:
+
+```bash
+buildah config --entrypoint '["/usr/sbin/nginx","-c","/app/nginx.conf",”-p”,”/app/”]' $ctr
+```
+
 With those changes, we can commit, create a new layer, and remount it with the following sequence of commands:
-$ image=$(buildah commit --rm $ctr my_nginx)
-$ ctr=$(buildah from $image)
-$ ctr_wd=$(buildah mount $ctr)
+
+```bash
+image=$(buildah commit --rm $ctr my_nginx)
+ctr=$(buildah from $image)
+ctr_wd=$(buildah mount $ctr)
+```
+
 Now, with the new layer built and mounted, let’s add some content to host into it:
-$ mkdir $ctr_wd/app/srv
-$ echo “Hello, World!” > $ctr_wd/app/srv/index.html
+
+```bash
+mkdir $ctr_wd/app/srv
+echo “Hello, World!” > $ctr_wd/app/srv/index.html
+```
+
 Let’s commit that container for us to run:
-$ buildah commit $ctr my_nginx
+
+```bash
+buildah commit $ctr my_nginx
+```
