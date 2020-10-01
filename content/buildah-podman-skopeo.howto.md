@@ -235,4 +235,4 @@ buildah push my_hello_world docker.io/<username>/my_hello_world
 
 # Next Steps
 
-
+With these basics, you can build all sorts of applications into a container. Since we aren't using Docker, we can do this without needing access to the Daemon or root access. 
