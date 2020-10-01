@@ -15,7 +15,7 @@ My preferred way to build my container images is with [Buildah](https://buildah.
 
 Note: I'll probably be using "container" and "container image" interchangeably. It should be obvious from context what I mean.
 
-Buildah uses the standard CRI set of tooling and configuration which means that it runs very nicely along side CRI-O, Podman, and Skopeo making for a full (mostly drop in) replacement for Docker.
+Buildah uses the standard CRI set of tooling and configuration which means that it runs very nicely along side CRI-O and Podman making for a full (mostly drop in) replacement for Docker.
 
 # What is a Container (simply)
 
@@ -37,15 +37,13 @@ Buildah builds OCI compliant images. It can allow you to run commands in the con
 
 Podman runs images in a CRI compatible runtime (such as CRI-O). It is a drop in replacement for Docker and supports all of the same subcommands.
 
-Skopeo copies images from one location to another and can handle switching formats if needed. 
-
 
 # Installation 
 
 To install on OpenSUSE, just run:
 
 ```bash
-zypper in podman buildah skopeo
+zypper in podman buildah
 ```
 
 RedHat and Ubuntu (as well as most major distros) have these tools in their repos as well.
@@ -221,13 +219,20 @@ This will run with the terminal attached so you can see any output from the comm
 
 Let's publish our new container to a registry!
 
-We can use Skopeo to do this but first we will likely need to log in to our registry!
+We can use either `buildah push` or `podman push` to do this. Since we've been on a buildah kick, let's use that!
 
-
+Let's login to dockerhub so we can actually push first: (create a dockerhub account first if you haven't already!)
 
 ```bash
-skopeo login
+buildah login docker.io
 ```
 
+Then we can push the images with:
+
+```bash
+buildah push my_hello_world docker.io/<username>/my_hello_world
+```
+
+# Next Steps
 
 
