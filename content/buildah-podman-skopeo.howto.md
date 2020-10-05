@@ -31,7 +31,7 @@ As these are really just a collection of bits, there's no magic to building one 
 
 # Toolset
 
-There a little bit of overlap between the tools but they each do a different part of the puzzle.]
+There a little bit of overlap between the tools but they each do a different part of the puzzle.
 
 Buildah builds OCI compliant images. It can allow you to run commands in the container’s context as well as mount the container’s filesystem to move files in from elsewhere 
 
