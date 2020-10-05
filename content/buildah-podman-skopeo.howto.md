@@ -11,24 +11,24 @@ One problem with this is that it requires access to the Docker daemon which then
 These problems become more important when you start automating container builds as someone could use a CI/CD pipeline to execute their own code which would get run with elevated privileges! Removing the dependency on the Daemon removes this path of exploits.
 
 
-My preferred way to build my container images is with [Buildah](https://buildah.io)!
+My preferred way to locally build my container images is with [Buildah](https://buildah.io)!
 
 Note: I'll probably be using "container" and "container image" interchangeably. It should be obvious from context what I mean.
 
 Buildah uses the standard CRI set of tooling and configuration which means that it runs very nicely along side CRI-O and Podman making for a full (mostly drop in) replacement for Docker.
 
-# What is a Container (simply)
+# What is a Container (somewhat simplified)
 
 A container is a collection of filesystem layers that when joined together provide everything needed to run the application in a self-contained way. It also includes a manifest that describes how to use what’s inside the container.
 
-The process for building a container is to build a layer, save it, build the next layer, save it, etc... until you have everything you want in there. The reason for splitting out layers is to ease both the building and splitting out of layers. 
+The process for building a container is to build a layer, save it, build the next layer, save it, etc... until you have everything you want in there. 
 
-If a certain part of your build step always builds the same thing, why repeat that work? The same is for transport, if there’s a large baseline that each container needs, you don’t need to download it every time.
+The reason for splitting out layers is to ease both the building and splitting out of layers. If a certain part of your build step always builds the same thing, why repeat that work? The same is for transport, if there’s a large baseline that each container needs, you don’t need to download it every time.
 
 As these are really just a collection of bits, there's no magic to building one that requires a centralized service to do the build. 
 
 
-# Toolset
+# Tool Set
 
 There a little bit of overlap between the tools but they each do a different part of the puzzle.
 
