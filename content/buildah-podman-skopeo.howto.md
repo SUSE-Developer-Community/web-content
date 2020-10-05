@@ -20,13 +20,12 @@ Buildah uses the standard CRI set of tooling and configuration which means that 
 # What is a Container (simply)
 
 A container is a collection of filesystem layers that when joined together provide everything needed to run the application in a self-contained way. It also includes a manifest that describes how to use what’s inside the container.
+
 The process for building a container is to build a layer, save it, build the next layer, save it, etc... until you have everything you want in there. The reason for splitting out layers is to ease both the building and splitting out of layers. 
+
 If a certain part of your build step always builds the same thing, why repeat that work? The same is for transport, if there’s a large baseline that each container needs, you don’t need to download it every time.
 
-
-[Some graphic here?](!/img/asdas )
-
-As these are really just a collection of bits, there's no magic to building one that requires a centralized service to do the build. Also, removing the 
+As these are really just a collection of bits, there's no magic to building one that requires a centralized service to do the build. 
 
 
 # Toolset
@@ -35,12 +34,12 @@ There a little bit of overlap between the tools but they each do a different par
 
 Buildah builds OCI compliant images. It can allow you to run commands in the container’s context as well as mount the container’s filesystem to move files in from elsewhere 
 
-Podman runs images in a CRI compatible runtime (such as CRI-O). It is a drop in replacement for Docker and supports all of the same subcommands.
+Podman runs images in a CRI compatible runtime (such as CRI-O). It is a drop in replacement for Docker and supports all of the same subcommands. (For example, you can just run `podman build` instead of docker build if you want to write your builds in Dockerfiles)
 
 
 # Installation 
 
-To install on OpenSUSE, just run:
+To install on openSUSE, just run:
 
 ```bash
 zypper in podman buildah
@@ -50,7 +49,7 @@ RedHat and Ubuntu (as well as most major distros) have these tools in their repo
 
 This will install the tools needed and all of their dependencies. 
 
-To run as a non-root user, you will need to map your user to a list of user and group ids that can be 
+To run as a non-root user, you will need to map your user to a list of user and group ids that can be used to run commands from within containers.
 
 This can be done with:
 
