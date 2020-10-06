@@ -71,7 +71,7 @@ Create the base layer and hold on to the name for later steps.
 For ease of instruction we will start with a OpenSUSE specific base layer (which I choose to trust). For containers without dependencies (where the application is a compiled binary), you can use `buildah from scratch` to start with an empty layer.
 
 ```bash
-ctr=$(buildah from "docker.io/opensuse/leap:15.2")
+ctr=$(buildah from "registry.opensuse.org/opensuse/leap:15.2")
 ```
 
 NOTE: For most scripts it’s easier to just capture it in the first step and just use it as a variable. If you are doing this manually,the value can be found as the Container ID in the output of:
