@@ -6,6 +6,8 @@ draft: true
 
 # DevOps: A Cultural Movement for a New Way of Working 
 
+Background
+
 # What really is DevOps? 
 
 The term derived from the culmination of two words, development and operations, seems fairly intuitive, but what is it really in the modern technological age. DevOps has evolved to be a culture of work that encourages cross-functional collaboration between development and operations teams to accelerate the rate at which enterprises realize value for technical and social changes. It is less about a department or job function, but rather a way of thinking, a philosophical mindset that helps organizations develop and maintain efficient and sustainable practices. 
