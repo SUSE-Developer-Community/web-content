@@ -20,22 +20,21 @@ No collaborative culture has ever been successful in a vacuum, especially when o
 
 The new way of doing things with DevOps, doesn’t mean let’s throw out everything we have done in the past. It is actually not about a prescription for the only true way of doing things, but encourages numerous ways DevOps principles can be applied throughout the entire organization. DevOps allows teams to implement integration and speeds the delivery of go-to-market products. Some of the main driving reasons DevOps is so important are;
 
-1. Predictability: DevOps offers significantly lower failure rate of new releases
-2. Reproducibility: Version everything so that earlier version can be restored anytime.
-3. Maintainability: Effortless process of recovery in the event of a new release crashing or disabling the current system.
-4. Time to market: DevOps reduces the time to market up to 50% through streamlined software delivery. This is particularly the case for digital and mobile applications.
+1. Predictability: Because differences between new releases are much smaller, DevOps can offer significantly lower failure rate of new releases. 
+2. Reproducibility: Since all pieces of the build and deploy are kept in version control, earlier versions can be restored anytime.
+3. Maintainability: Similarly, Since all pieces of the build and deploy are kept in version control, earlier versions can be restored anytime.
+4. Time to market: By building on well known process improvements, DevOps reduces the time to market. This is particularly the case for digital and mobile applications. 
 5. Greater Quality: DevOps helps the team to provide improved quality of application development as it incorporates infrastructure issues.
-6. Reduced Risk: DevOps incorporates security aspects in the software delivery lifecycle. It helps in reduction of defects across the lifecycle.
+6. Reduced Risk: By allowing the developer and operations teams work more closely together, it helps in reduction of defects across the lifecycle.
 7. Resiliency: The Operational state of the software system is more stable, secure, and changes are auditable.
-8. Cost Efficiency: DevOps offers cost efficiency in the software development process which is always an aspiration of IT companies' management.
-9. Breaks larger code base into small pieces: DevOps is based on the agile programming method. Therefore, it allows breaking larger code bases into smaller and manageable chunks.
+8. Cost Efficiency: By minimizing wasted effort, DevOps offers cost efficiency in the software development process which is always an aspiration of IT companies' management.
 
 # The foundation of DevOps
 
 At the heart of DevOps, success if found when people come together and work as teams rather than distinct groups with a desire for mutual understanding. With collaboration and clear communication, teams can work more productively towards their shared organizational goals. 
 
-If you want more information about this topic, read this;
+If you want more information about this topic, read this [article](https://www.guru99.com/devops-tutorial.html) 
 
 If you have content you feel our community could benefit the community, feel free to reach out at Brendan.bulmer@suse.com 
 
-If this was interesting to you and you are a developer, check out our sandbox here: 
+If this was interesting to you and you are a developer, check out our sandbox [here](https://developer.suse.com/capsandbox/)  
