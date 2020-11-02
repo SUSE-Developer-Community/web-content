@@ -188,14 +188,22 @@ instead.
 
 # Step 3: Making it reachable
 
-Now I have my container running on Kubernetes, but how do I talk to it? By default, the port exposed by the container is only reachable from *within* the cluster. To make it accessible from the outside world, I need to create a Service. The [Kubernetes documentation on Services](https://kubernetes.io/docs/concepts/services-networking/service/) says a Service is "An abstract way to expose an application running on a set of Pods as a network service." So a Service is somewhat equivalent to a Cloud Foundry Route (which, confusingly, has nothing to do with an IP rooute - it's a URL that exposes an HTTP service endpoint). 
+Now I have my container running on Kubernetes, but how do I talk to it? What I'm used to from Cloud Foundry is that each app automatically gets a [route](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html), which is basically an external http endpoint that hits the default route specified by my app. If I don't specify it, CF will assign a so-called random route. Every app in CF has a route, unless you actively make sure it doesn't get one. Yes, there are cases where that makes sense but that's off topic for now. 
 
-The way I make sense out of Kubernetes Services is that pods, particularly when created by ReplicaSets, are perishable. They may get destroyed or re-created any time, and hence the IP address I was talking to a second ago may not be the one I need to talk to now. The Service resource is a way to establish a stable endpoint to talk to while the underlying backend and all the Kubernetes container orchestration shebang does what it does. 
+In Kubernetes, things are a bit more complicated. The Kubernetes deployment resource I used above doesn't care about making things reachable from the outside world - it cares about deploying stuff. As a result, the port exposed by the container (the one I specified in the Dockerfile) is only reachable from *within* the cluster - other containers and other pods can (theoretically) use it to talk to my app, but nobody else. Is is however not a good idea to do it this way either, since pods are ephemeral - they come and go. One key assumption Kubernetes makes about containers is that they die and have to be re-created all the time - as we all know, developers can't be trusted, right? So the deployment's main concern is to make sure that actual state of the deployment matches the wanted state expressed by it's yaml specification. If a container dies, it will recreate it (well, in fact that's what the underlying ReplicaSet does but hey). 
 
-To create the service I just run
+Fair enough, so what else have we got? 
+
+The first thing you'll run across in many examples is the concept of a Kubernetes *Service*. The [Kubernetes documentation on Services](https://kubernetes.io/docs/concepts/services-networking/service/) says a Service is "An abstract way to expose an application running on a set of Pods as a network service." The key idea of a service is that it hides the ephemeral nature of a pod - no matter how often pods get restarted or scaled up and down, the service endpoint remains accessible and doesn't change. It also performs basic (round-robin) load balancing, i.e. it makes sure that incoming requests are distributed evenly across a number of identical containers in a pod or a set of pods in a ReplicaSet. 
+
+So is a Service the Kubernetes counterpart of a Cloud Foundry application route? Not necessarily. Since there are different service types you can specify. To make our service externally reachable, we need to make it be of the type "NodePort". This essentially makes Kubernetes assign a random TCP port in the port range between 30000 and 32767 and makes this port reachable outside the cluster. There's another Service type called "LoadBalancer" which essentially implements the service by requesting a load balancer resource from the underlying cloud provider - but let's leave that aside for now. 
+
+Btw, a good article that helped me wrap my head around all this is ["Kubernetes Ingress for Beginners"](https://thenewstack.io/kubernetes-ingress-for-beginners/) by Nick Ramirez. 
+
+To create a service of type "NodePort" for my hello world app I just run
 
 ```
-    kubectl create svc nodeport timhelloworld --tcp=8080:80 --dry-run -o yaml > timhelloworld-service.yaml
+    kubectl create svc nodeport timhelloworld --tcp=8080:80
 ```
 
 The result is 
@@ -206,12 +214,49 @@ The result is
     kubernetes              ClusterIP      10.43.0.1       <none>        443/TCP          35d
     timhelloworld           NodePort       10.43.251.28    <none>        8080:30683/TCP   1m
 ```
+which means that port 8080 of the container (where the web server listens) is now mapped to port 30683 of the Kubernetes VM's public IP address. 
 
-Now I can curl my Kubernetes VM's external IP address on port 80 and see the index.html page being returned:
+Now I can curl my Kubernetes VM's external IP address on port 80 and see the index.html page being returned (192.168.33.11 is the hosts-de IP address of my Kubernetes VM):
 
+```
+    > curl 192.168.33.11:30683
+    <html>
+        <head>
+            <title>Python says Hello World!</title>
+        </head>
+        <body>
+            <h1>Python says Hello World!</h1>
+            <p>And this is running on the SUSE Cloud Application Platform developer sandbox...</p>
+            <p>Update this page and simply run cf push to get your changes online within seconds!</p>
+        </body>
+    </html>
+```
+Close but no cigar yet - I don't have a an actual domain name for my app like I used to have in Cloud Foundry. 
 
+To get things lifted up to the level of domains and hostnames as opposed to IP addresses and ports, I need yet another Kubernetes resource, called Ingress. An Ingress basically specifies how incoming requests should be routed to services. For example, if your app consists of multiple services, you can use an ingress to make sure requests to http://my-app.my-domain/service1 go to service 1, and http://my-app.my-domain/service2 go to service 2.  
 
+For the very simple hello world example we're discussing here, it is again really simple to define an Ingress that does the job of assigning a domain name to my app:
 
-Create service. reconfigure VM so that it becomes reachable (Private network). 
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: timhelloworld-ingress
+spec:
+  rules:
+  - host: timhelloworld.192.168.33.11.xip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: timhelloworld
+          servicePort: 8080
+```
 
-Some future work pointers (MetalLB). 
+Note that I'm using the xip.io service to cheat around the fact that I do not have a public DNS entry that resolves to my k3s VM's IP address. I could have entered this into the /etc/hosts file on my laptop but this way is just simpler and quicker. In case you don't know what xip.io does, it simple cuts out the IP address from the URL and sends it back as the IP address this name resolves to. Why didn't I have this idea myself ages ago? Don't say it...
+
+And now, finally, we are back to where we started. What a journey. All just to reproduce what a single 'cf push' command does. 
+
+Is this because I'm the first one noting that there's a bit of a complexity problem here? Not at all. If there's one thing that's certain, then it is that with everything that looks like a really good idea, most of the time someone else thought about it already. Same here. There's a ton of tools out there which try to make things simpler for developers when developing apps that only run properly once deployed to Kubernetes. More on that in a future post - stay tuned. 
+
+If you've made it until here, thank you very much for bearing with me. Remember, the only stupid question is the unasked one and everybody else is just googling for stuff just like you are. 
