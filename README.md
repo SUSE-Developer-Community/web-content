@@ -1,13 +1,13 @@
 # Workspace for evangelism content
 
-This repository will serve as a workspace to develop and collect unpublished web content until we know what our CMS will eventually be. For the time being we will write content in Mardown since that format is easy to convert to anything. For now, don't focus on looks & layout - let's focus on content. 
+This repository will serve as a workspace to develop and collect unpublished web content until we know what our CMS will eventually be. For the time being we will write content in [Markdown](https://www.markdownguide.org/basic-syntax/) since that format is easy to convert to anything. For now, don't focus on looks & layout - let's focus on content. 
 
 # What you need on your machine
 
-- Git client (dowload from e.g. [https://git-scm.com/downloads])
+- Git client (dowload from e.g. [https://git-scm.com/downloads](https://git-scm.com/downloads))
 - Text editor (vi, nano, emacs, notepad, etc.) or IDE (VSCode, Atom, Sublime). My recommendation is [Visual Studio Code](https://code.visualstudio.com), since it is available on any platform and lends itself well to both basic and advanced usage. 
 - If you want to render web content locally, install [Hugo](https://gohugo.io) (see below for more info). 
-- Images should be created with [draw.io](https://app.diagrams.net) preferably (see below as well). 
+- Images should be created with [draw.io](https://app.diagrams.net) preferably. 
 
 # What goes where?
 
@@ -54,7 +54,7 @@ Change to your local repo clone's root directory, then run
 
     `hugo serve -D`
 
-in a local shell. 
+in a local shell. You should now be able to access your content at [http://localhost:1313](http://localhost:1313). 
 
 # Other useful resources
 
