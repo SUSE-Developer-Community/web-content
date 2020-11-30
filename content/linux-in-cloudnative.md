@@ -16,7 +16,24 @@ Even in the modernest of modern IT stacks, most everything is still based on Lin
 What has changed, is our expectations of how they are managed once built. 
 
 
-This is not trying to be an exhaustive list of linux skills, it's just some places where I've seen people either try to reinvent the wheel or get into trouble because they made poor assumptions. 
+While writing this article, an extremely interesting example came up in the form of AWS Kinesis failing and taking down us-east-1 for a fairly large amount of time. The root cause of this failure was a innocuous-seeming increase in backend capacity. This caused a over-run of the linux processes allocated in the front-end which cascaded into a widespread failure. 
+
+One main take away from this failure is that if the AWS operations team can make this mistake, anyone can. (It definitely makes me feel better about having some odd instability in our developer sandbox due to inotify-limits being met!)
+
+
+
+There are a lot of places where we need to remember our linux fundamentals. This is by no means an exhaustive list, just a few that I've run in to or seen others run in to.
+
+
+# Resource Allocations and Limits
+
+Linux has a lot of resource constraints built into the OS. 
+
+As we saw in the AWS example, process limits exist!
+
+There are also file descriptor limits, inotify limits, port allocation limits.
+
+For more high performance datacenters, we should keep in mind physical constraints as well. Such as disk speed, network latency, heat dissipation, 
 
 
 # Security! 
