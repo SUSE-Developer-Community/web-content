@@ -11,7 +11,7 @@ menu:
 
 Note: I feel like this title might suggest that I'm going to be the old guy yelling at cloud and talking about how all you "whipper-snappers" (does that translate to other countries other than the US?) are moving too fast for me. I hope I'm way too young for that kinda talk and it's not that way at all. 
 
-Even in the modernest of modern IT stacks, most everything is still based on Linux as the primary Operating System running application binaries and abstrating away the nitty gritty of hardware and scheduling. Containers are just linux processes but with some extra context (or lack of) surrounding them and the building of these applications are the same. 
+Even in the modernest of modern IT stacks, most everything is still based on Linux as the primary Operating System running application binaries and abstracting away the nitty gritty of hardware and scheduling. Containers are just linux processes but with some extra context (or lack of) surrounding them and the building of these applications are the same. 
 
 What has changed, is our expectations of how they are managed once built. 
 
@@ -33,7 +33,7 @@ As we saw in the AWS example, process limits exist!
 
 There are also file descriptor limits, inotify limits, port allocation limits.
 
-For more high performance datacenters, we should keep in mind physical constraints as well. Such as disk speed, network latency, heat dissipation, etc. 
+For more high performance data centers, we should keep in mind physical constraints as well. Such as disk speed, network latency, heat dissipation, etc. 
 
 For a full list of tuning parameters, check out https://documentation.suse.com/sles/15-SP2/single-html/SLES-tuning/#book-sle-tuning
 
@@ -48,9 +48,9 @@ We still need to be concerned with aspects like artifact size, build time, gover
 
 # Security! 
 
-NOTE: I'm not a security expert so the main point is that nothing has changed, and there's just more work to do...
+NOTE: I'm not a security expert so the main point is that nothing has changed, and there's just more work to do as Kubernetes is insecure by default. 
 
-Just because the application is walled off in a container doesn't mean there's no threat. There have been many SVEs found where an rouge process can break out of it's confinement like Tai Lung from Kung Fu Panda. This means that we still need to think about security on the host and in the applications as well as security of the cluster data plane and network. 
+Just because the application is walled off in a container doesn't mean there's no threat. There have been many SVEs found where a rouge process can break out of it's confinement like Tai Lung from Kung Fu Panda. This means that we still need to think about security on the host and in the applications as well as security of the cluster data plane and network. 
 
 We need to still be concerned with host and physical security if running locally. This also means not running privileged pods in your cluster as those can get root access to your node and mess with kernel parameter (ask me how I know...). 
 
