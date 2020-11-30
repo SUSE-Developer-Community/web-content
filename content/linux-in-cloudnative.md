@@ -33,15 +33,11 @@ As we saw in the AWS example, process limits exist!
 
 There are also file descriptor limits, inotify limits, port allocation limits.
 
-For more high performance datacenters, we should keep in mind physical constraints as well. Such as disk speed, network latency, heat dissipation, 
+For more high performance datacenters, we should keep in mind physical constraints as well. Such as disk speed, network latency, heat dissipation, etc. 
 
+For a full list of tuning parameters, check out https://documentation.suse.com/sles/15-SP2/single-html/SLES-tuning/#book-sle-tuning
 
-# Security! 
-
-Just because the application is walled off in a container, doesn't mean there's no threat. There have been many SVEs found where an rouge process can break out of it's confinement like Tai Lung from Kung Fu Panda. This means that we still need to think about security. 
-
-We need to still be concerned with governance of dependencies, firewalls, host and physical security, as well as 
-
+*TODO* Find more human readable list of parameters?
 
 # Build Process
 
@@ -50,10 +46,27 @@ The processes for building applications don't really change much. Most CI/CD pip
 We still need to be concerned with aspects like artifact size, build time, governance, and reproducability to be able to best help the Ops team do their job! For example, knowing the dependencies that go into a build and being able to track them to the final product lets us know where potential issues might pop up before they do.
 
 
+# Security! 
+
+NOTE: I'm not a security expert so the main point is that nothing has changed, and there's just more work to do...
+
+Just because the application is walled off in a container doesn't mean there's no threat. There have been many SVEs found where an rouge process can break out of it's confinement like Tai Lung from Kung Fu Panda. This means that we still need to think about security on the host and in the applications as well as security of the cluster data plane and network. 
+
+We need to still be concerned with host and physical security if running locally. This also means not running privileged pods in your cluster as those can get root access to your node and mess with kernel parameter (ask me how I know...). 
+
+Setting up app armor profiles, correct firewalld rules, and privileges 
+
+There's also security concerns with the build pipeline. Too many tools take a shortcut and ask for the container to mount the docker socket. This would allows a ci/cd script to make changes to your cluster. One thing that can help this (in my opinion) is moving from the docker daemon to cri-o and using tools that are runtime agnostic.
+
 # Optimization
 
-Sadly, spinning up new instances and scaling horizontally to infinity doesn't fix the physics of how long it takes electrons to move around. This means that we should still be concerned with both computational complexity *and* resource constriants. 
+Sadly, spinning up new instances and scaling horizontally to infinity doesn't fix the physics of how long it takes electrons to move around. This means that we should still be concerned with both computational complexity *and* resource constraints. 
 
 For example, knowing when to use different storage types or when it's appropriate to split processing across the network can dramatically change the end user's experience of a system. 
 
+All of these optimization problems tend to be pretty specialized skills (of which, I likely have none). They liekly aren't important in the first stages of building and scaling an app, but can mean the difference between success and failure when things start to grow and get hectic. 
 
+
+# All is not lost!
+
+Luckily, you likely have people in your organization with all of these skills! 
