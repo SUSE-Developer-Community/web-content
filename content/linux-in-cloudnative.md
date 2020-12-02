@@ -21,50 +21,48 @@ While writing this article, an extremely interesting example came up in the form
 One main take away from this failure is that if the AWS operations team can make this mistake, anyone can. (It definitely makes me feel better about having some odd instability in our developer sandbox due to inotify-limits being met!)
 
 
+We likely don't need to know or keep track of all of these different things, in our day to day work in the cloud, but we do need to remember that Kubernetes is just a nice set of abstractions over Linux. 
 
-There are a lot of places where we need to remember our linux fundamentals. This is by no means an exhaustive list, just a few that I've run in to or seen others run in to.
+
+I am not claiming to be a Linux expert but have put together a list of places where I've run into issues or seen others struggle. This is by no means exhaustive, and likely doesn't even scratch the surface of where you could potentially run into "legacy" issues while running in the cloud! 
+
 
 
 # Resource Allocations and Limits
 
-Linux has a lot of resource constraints built into the OS. 
+Linux has a lot of resource constraints built into the OS and these can cause failures in odd and unexpected ways.
 
 As we saw in the AWS example, process limits exist!
 
-There are also file descriptor limits, inotify limits, port allocation limits.
+There are also file descriptor limits, inotify limits, port allocation limits, and similar. And for more high performance data centers, we should also keep in mind physical constraints as well (such as disk speed, network latency, heat dissipation, etc...)
 
-For more high performance data centers, we should keep in mind physical constraints as well. Such as disk speed, network latency, heat dissipation, etc. 
-
-For a full list of tuning parameters, check out https://documentation.suse.com/sles/15-SP2/single-html/SLES-tuning/#book-sle-tuning
+For a full list of tuning parameters on SUSE Enterprise Linux and OpenSUSE, check out https://documentation.suse.com/sles/15-SP2/single-html/SLES-tuning/#book-sle-tuning
 
 *TODO* Find more human readable list of parameters?
 
 # Build Process
 
-The processes for building applications don't really change much. Most CI/CD pipelines are really just directed graphs of fancy scripts. This means that the tooling shouldn't change much other than the way it gets called. 
+The processes for building applications don't really change much. Most CI/CD pipelines are really just directed graphs of fancy scripts. This means that the build tooling shouldn't change much other than the way it gets triggered.
 
 We still need to be concerned with aspects like artifact size, build time, governance, and reproducability to be able to best help the Ops team do their job! For example, knowing the dependencies that go into a build and being able to track them to the final product lets us know where potential issues might pop up before they do.
 
 
 # Security! 
 
-NOTE: I'm not a security expert so the main point is that nothing has changed, and there's just more work to do as Kubernetes is insecure by default. 
+NOTE: I'm also not a security expert so the main point is that nothing has changed, and there's just more work to do as Kubernetes is insecure by default. 
 
 Just because the application is walled off in a container doesn't mean there's no threat. There have been many SVEs found where a rouge process can break out of it's confinement like Tai Lung from Kung Fu Panda. This means that we still need to think about security on the host and in the applications as well as security of the cluster data plane and network. 
 
-We need to still be concerned with host and physical security if running locally. This also means not running privileged pods in your cluster as those can get root access to your node and mess with kernel parameter (ask me how I know...). 
-
-Setting up app armor profiles, correct firewalld rules, and privileges 
+We need to still be concerned with host and physical security if running locally. Setting up App Armor profiles, correct firewall rules, and minimal privileges are still needed to keep the control plane and applications secure. This also means not running privileged pods in your cluster as those can get root access to your node and mess with kernel parameter (ask me how I know that it's possible...). 
 
 There's also security concerns with the build pipeline. Too many tools take a shortcut and ask for the container to mount the docker socket. This would allows a ci/cd script to make changes to your cluster. One thing that can help this (in my opinion) is moving from the docker daemon to cri-o and using tools that are runtime agnostic.
 
 # Optimization
 
-Sadly, spinning up new instances and scaling horizontally to infinity doesn't fix the physics of how long it takes electrons to move around. This means that we should still be concerned with both computational complexity *and* resource constraints. 
+Sadly, spinning up new instances and scaling horizontally to infinity doesn't fix the physics of how long it takes electrons to move around. This means that we should still be concerned with both computational complexity *and* resource constraints. These aren't normally important early in the process but can definitely start to be costly when you get to push the system to scale to larger sizes.
 
-For example, knowing when to use different storage types or when it's appropriate to split processing across the network can dramatically change the end user's experience of a system. 
+For an example that I've seen play out in my systems, knowing when to use different storage types can dramatically change the end user's experience of a system. The same is true for knowing when to break up single services or components into multiple pieces to allow faster or more flexible scaling.
 
-All of these optimization problems tend to be pretty specialized skills (of which, I likely have none). They liekly aren't important in the first stages of building and scaling an app, but can mean the difference between success and failure when things start to grow and get hectic. 
 
 
 # All is not lost!
