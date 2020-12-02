@@ -67,4 +67,7 @@ For an example that I've seen play out in my systems, knowing when to use differ
 
 # All is not lost!
 
-Luckily, you likely have people in your organization with all of these skills! 
+Luckily, you likely have people in your organization with all of these skills! They might be hiding in the Linux Administration role but those skills are transferable. 
+
+The key take away of all of this, is that all of these new ideas are layers of abstractions on top of old ideas and a general understanding of the whole stack really helps when things get weird and nobody knows why!
+
