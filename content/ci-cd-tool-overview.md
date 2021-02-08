@@ -23,6 +23,8 @@ It also comes with some pretty nice visualizations of the components being deplo
 
 This is a fully featured GitOps solution that allows your developers to know less about Kubernetes that other options. It's actually built on top of Tekton (below) and adds a ton of usability enhancements and abstractions to the pipelines. 
 
+For those that are from the Java ecosystem, Jenkins X is no longer based on Jenkins and has been redesigned to build on the years of CI/CD experience while targeting Kubernetes as a pipeline. 
+
 ## Gitlab CI
 
 As part of their full set up, Gitlab offers an integrated way to automate pipelines directly from a project's Gitlab repo in an easy to do way. Pipelines are tied to the repositories themselves and can be extended to make developer's lives easier with CD options like Argo. 
@@ -43,7 +45,6 @@ Spinnaker is an continuous deployment specific option from Netflix. As such, it 
 ## Drone
 
 Drone gives you a way (similar to CircleCI or GitlabCI) to create full pipelines in a configuration in git with your application code. It supports several git providers to give a lot of flexibility in where you store your code (something that Gitlab CI and Github Actions obviously don't allow). 
-
 
 
 # How do I choose?
