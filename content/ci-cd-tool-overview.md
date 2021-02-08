@@ -50,5 +50,5 @@ Drone gives you a way (similar to CircleCI or GitlabCI) to create full pipelines
 
 As with every infrastructure choice, there are trade offs to be made. In CI/CD, the tradeoffs are based around power vs usability; complete CI/CD vs CD specific; pipelines coupled with code vs higher order abstractions, etc.
 
-Most of the options can be made to do what you need, but obviously you will get more out of the tool if it's used in conjunction.
+Most of these options can be made to do what you need, but obviously you will get more out of the tool if it's used in conjunction with processes and architectures that work in the same way the creators assume! Definitely try out a few and match them up with how you think about building applications to give the best experience.
 
