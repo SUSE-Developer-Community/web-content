@@ -1,6 +1,4 @@
-# Vagrant never gets old - 
-
-TODO: fancier title
+# Vagrant never gets old 
 
 Vagrant is not new. In fact, it's so not new that articles providing a good entry level overview as well as the most important tips and tricks have become hard to come by. It's not one of those new shiny objects anymore, so there's no point in writing that article in 2021, right? 
 
