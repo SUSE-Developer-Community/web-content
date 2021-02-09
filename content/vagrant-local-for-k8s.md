@@ -15,20 +15,13 @@ TODO: walk through the steps top spin up a VM without Vagrant to illustrate the 
 
 In a nutshell, think of it as a wrapper around your hypervisor. 
 
-TODO: Draw a parallel to libvirt? Maybe put this in a "Other tools" section towards the end...
-
 # The basics
 
 ## Installing Vagrant
 
-Step 1: make sure your hypervisor is set up. 
-Step 2: install vagrant
-    - MacOS: use homebrew
-    - Windows: use installer from Hashicorp or Windows package manager
-    - Linux: your distro's package manager, or upstream package (deb or rpm depending on what distro you use) 
-    TODO: check if upstream packages exist
+Hashicorp provides Vagrant installers for all major platforms on their [download page](https://www.vagrantup.com/downloads). As per their [installation instructions](https://learn.hashicorp.com/tutorials/vagrant/getting-started-install) these installers should be preferred over packaged versions available in upstream package repositories. I want to note that I installed it via homebrew and didn't hit any problems yet, but hey. I'm also fairly confident that the vagrant package on openSUSE Leap works just fine - you may not have the very latest version but that's probably fine for most people. 
 
-TODO: Does it need to be set up for the hypervisor in use?
+If you want to use Vagrant with a Hypervisor that is not installed by default, you should install that one first. In my case, I'm using Vagrant on top of Oracle [Virtualbox](https://www.virtualbox.org) on a Mac. 
 
 ## Spinning up your first Vagrant box
 
@@ -191,3 +184,6 @@ Let's take a look at the locally cached images on my machine at the time of writ
 
 As you can see, I have a couple of different versions of openSUSE Leap and Tumbleweed. The `vagrant box` command and its subcommands give you a couple of ways to manage the local image cache. As suggested by the output above, you can get the latest version of an image with `vagrant box update`. You can remove an image with `vagrant box remove`, and you can add an image you downloaded manually or created yourself with `vagrant box add`. The latter is also the key to being able to verify the integrity of the images in you image cache with e.g. a sha256 checksum, since you need to wrap the checksum in a little bit of JSON before you can do that. I'll get more into that in a later post, but you can find some info on this in [a bug report](https://github.com/CentOS/sig-cloud-instance-build/issues/118) on the CentOS GitHub page. 
 
+# Famous last words
+
+This is all for today - hope this was useful. If you liked the article, please cheer it so that it becomes easier for others to find. You're also highly welcome to leave a comment, ask a follow-up question or tell me what I got wrong in the comments. What is your favorite Vagrant command I didn't cover? 
