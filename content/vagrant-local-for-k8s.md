@@ -1,8 +1,8 @@
 # Vagrant never gets old 
 
-Let's face it -- Vagrant is not a shiny new object. In fact, it's so not new that there are few articles providing an entry-level overview as well as important tips and tricks. So what's the point in writing about Vagrant in 2021? 
+Let's face it -- Vagrant is not exactly a shiny new object. In fact, it's so not new that there are few articles providing an entry-level overview as well as important tips and tricks. So what's the point in writing about Vagrant in 2021? 
 
-Vagrant is still an extremely useful tool. In this article, I'll give a brief overview of what it has to offer. Sure, you could figure all this out by reading the documentation and playing around a bit. But if you're trying to get a job done (that does not happen to be learning Vagrant in the first place), this article might get you there faster. 
+It turns out that Vagrant is still an extremely useful tool. In this article, I'll give a brief overview of what it has to offer. Sure, you could figure all this out by reading the documentation and playing around a bit. But if you're trying to get a job done (that does not happen to be learning Vagrant in the first place), this article might get you there faster. 
 
 ## What is Vagrant?
 
