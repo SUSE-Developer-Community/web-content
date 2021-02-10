@@ -6,7 +6,7 @@ draft: true
 
 ## Intro 
 
-Continuous Integration (CI) and Continuous Delivery (CD) are hot topics right now as so many organizations move to the DevOps model of software development.  <!--CK Question. Sometimes CD is Continuous Deployment, right? Do you want to acknowledge that. Like: You may see CD defined as continuous deployment...in this case, I am defining it as ... bla bla. Also I think you need to define CI/CD -- OR are the only people reading this coming from Udacity, in which case they will know what CI CD is.-->
+Continuous Integration (CI) and Continuous Delivery (CD) are hot topics right now as so many organizations move to the DevOps model of software development.  <!--CK Question. Sometimes CD is Continuous Deployment, right? Do you want to acknowledge that. Like: You may see CD defined as continuous deployment...in this case, I am defining it as ... bla bla. Also I think you need to define CI/CD -- OR are the only people reading this coming from Udacity, in which case they will know what CI CD is. -->
 
 
 ## Options
