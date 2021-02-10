@@ -1,15 +1,14 @@
 # Vagrant never gets old 
 
-Let's face it -- Vagrant is not exactly a shiny new object. In fact, it's so not new that there are few articles providing an entry-level overview as well as important tips and tricks. So what's the point in writing about Vagrant in 2021? 
+Let's face it -- Vagrant is not exactly a shiny new object. In fact, it's so not new that there are few recent articles providing an entry-level overview as well as important tips and tricks. So what's the point in writing about Vagrant in 2021? 
 
 It turns out that Vagrant is still an extremely useful tool. In this article, I'll give a brief overview of what it has to offer. Sure, you could figure all this out by reading the documentation and playing around a bit. But if you're trying to get a job done (that does not happen to be learning Vagrant in the first place), this article might get you there faster. 
 
 ## What is Vagrant?
 
-In a nutshell, Vagrant lets you define virtual machines in a [declarative](https://en.wikipedia.org/wiki/Declarative_programming) way. It gives you a way to keep the configuration of your VM, including memory, disk and CPU needs, as well as any possible post install provisioning and configuration steps in a file so that it is easily reproducible. Otherwise, you'd need to perform this configuration manually each time you spin up a new VM from an installation image. Over time, getting the exact same result would be tricky.
+In a nutshell, Vagrant lets you define virtual machines in a [declarative](https://en.wikipedia.org/wiki/Declarative_programming) way. It gives you a way to keep the configuration of your VM, including memory, disk and CPU needs, as well as any possible post install provisioning and configuration steps in a file so that it is easily reproducible. Otherwise, you'd need to perform this configuration manually each time you spin up a new VM from an installation image. Over time, getting the exact same result would be tricky. In addition, Vagrant gives you a convenient way to start, suspend, resume and update your VMs without having to interact with your hypervisor directly. 
 
-In addition, Vagrant gives you a convenient way to start, suspend, resume and update your VMs without having to interact with your hypervisor directly. 
-TODO: walk through the steps top spin up a VM without Vagrant to illustrate the difference? 
+Without Vagrant, you'd have to define you VM (in case of Virtualbox this means clicking through a number of menus to make all the settings), download an installation image, mount it as a boot medium and then go through the installation procedure of your guest operating system. Not a terrible amount of work, but it quickly becomes annoying if you do this often. 
 
 In a nutshell, think of Vagrant as a wrapper around your hypervisor. 
 
@@ -85,7 +84,7 @@ Like with any VM, there are five important parts here:
 * Network config: how to reach your Vagrant box. As you can see, you can choose between exposing specific ports (which can be limited to being accessible only from certain IP addresses), exposing a host-only IP or bridging the guest's virtual network interface to the host's external network so that it becomes visible to other machines in the same network. Obviously, the latter needs to be handled with care. Don't forget to turn off your VMs before heading off to your next conference (whenever that is). I'm going with a private IP for now. 
 * Shared folders for data exchange between guest and host: by default, Vagrant mounts the directory where your vagrantfile is to /vagrant in the guest, which is perfectly fine for copying the occasional config file around and similar things. 
 * Provider config: where you define your hypervisor settings, such as how much memory your VM should have
-* Provisioning: [TO DO include definition] (e.g. install security updates or extra packages post-install). The example shown here uses the so-called shell provisioner, but you can also use proper provisioning languages like Ansible, Salt, etc.
+* Provisioning: customizing the VM according to your needs (e.g. install security updates or extra packages post-install). The example shown here uses the so-called shell provisioner that runs all commands like a shell script, but you can also use proper provisioning languages like Ansible, Salt, etc.
 
 Now that we have put together a basic configuration, let's take our new box out for a spin. All we need to do is run a simple `vagrant up` in the vagrant file directory. 
 
@@ -119,7 +118,7 @@ Now that we have put together a basic configuration, let's take our new box out 
     ==> default: Mounting shared folders...
         default: /vagrant => /Users/tim/Documents/src/vagrant/test
 
-Vagrant checks to see if it has the specified image available locally (Vagrant caches VM images to reduce the amount of data it needs to download), downloads the image if it isn't available in the local cache, brings up the VM, injects an ssh key and mounts the specified shared folders for easy data exchange between guest and host. 
+Vagrant checks to see if it has the specified image available locally (Vagrant caches VM images to reduce the amount of data it needs to download, downloads the image if it isn't available in the local cache, brings up the VM, injects an ssh key and mounts the specified shared folders for easy data exchange between guest and host. 
 
 Now we can use `vagrant ssh` to connect to the console. The Vagrant box can also be reached from the host via the private network IP address set in the vagrantfile. If you prefer to use your own ssh client, you can get all necessary information with the command `vagrant ssh-config`. 
 
