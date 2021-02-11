@@ -8,7 +8,7 @@ It turns out that Vagrant is still an extremely useful tool. In this article, I'
 
 In a nutshell, Vagrant lets you define virtual machines in a [declarative](https://en.wikipedia.org/wiki/Declarative_programming) way. It gives you a way to keep the configuration of your VM, including memory, disk and CPU needs, as well as any possible post install provisioning and configuration steps in a file so that it is easily reproducible. Otherwise, you'd need to perform this configuration manually each time you spin up a new VM from an installation image. Over time, getting the exact same result would be tricky. In addition, Vagrant gives you a convenient way to start, suspend, resume and update your VMs without having to interact with your hypervisor directly. 
 
-Without Vagrant, you'd have to define you VM (in case of Virtualbox this means clicking through a number of menus to make all the settings), download an installation image, mount it as a boot medium and then go through the installation procedure of your guest operating system. Not a terrible amount of work, but it quickly becomes annoying if you do this often. 
+Without Vagrant, you'd have to define your VM (in case of Virtualbox this means clicking through a number of menus to make all the settings), download an installation image, mount it as a boot medium and then go through the installation procedure of your guest operating system. Not a terrible amount of work, but it quickly becomes annoying if you do this often. 
 
 In a nutshell, think of Vagrant as a wrapper around your hypervisor. 
 
@@ -118,7 +118,7 @@ Now that we have put together a basic configuration, let's take our new box out 
     ==> default: Mounting shared folders...
         default: /vagrant => /Users/tim/Documents/src/vagrant/test
 
-Vagrant checks to see if it has the specified image available locally (Vagrant caches VM images to reduce the amount of data it needs to download, downloads the image if it isn't available in the local cache, brings up the VM, injects an ssh key and mounts the specified shared folders for easy data exchange between guest and host. 
+Vagrant checks to see if it has the specified image available locally (Vagrant caches VM images to reduce the amount of data it needs to download, downloads the image if it isn't available in the local cache, brings up the VM, injects an ssh key and mounts the specified shared folders for easy data exchange between guest and host.) 
 
 Now we can use `vagrant ssh` to connect to the console. The Vagrant box can also be reached from the host via the private network IP address set in the vagrantfile. If you prefer to use your own ssh client, you can get all necessary information with the command `vagrant ssh-config`. 
 
@@ -145,7 +145,7 @@ Let's look at an example. One thing you'll want to do with any new VM you're spi
 
 ### Vagrant Cloud and a Few Tips for Choosing your Base Image
 
-The base image you declare via `config.vm.box` in the vagrant file comes from a cloud service called [Vagrant Cloud](https://app.vagrantup.com/boxes/search). Essentially, Vagrant Cloud is to VMs what Docker hub is to containers - a salad bowl of all sorts of VM images. Some of them are generic base boxes, while some are tailored toward specific use cases by means of specific configuration and selection (addition and removal) of software contained in the image. You'll find boxes containing the base operating systems of all major Linux distributions such as Ubuntu, CentOS and, of course, openSUSE. 
+The base image you declare via `config.vm.box` in the vagrant file comes from a cloud service called [Vagrant Cloud](https://app.vagrantup.com/boxes/search). Essentially, Vagrant Cloud is to VMs what Docker Hub is to containers - a salad bowl of all sorts of VM images. Some of them are generic base boxes, while some are tailored toward specific use cases by means of specific configuration and selection (addition and removal) of software contained in the image. You'll find boxes containing the base operating systems of all major Linux distributions such as Ubuntu, CentOS and, of course, openSUSE. 
 
 Note that the same distro and version are sometimes provided by more than one account. Everyone can create an account on Vagrant Cloud and name it whatever they want, if the name is available. For example, the official Vagrant images maintained by the openSUSE community can be found under [https://app.vagrantup.com/opensuse](https://app.vagrantup.com/opensuse). 
 
