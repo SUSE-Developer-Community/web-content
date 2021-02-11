@@ -6,7 +6,8 @@ draft: true
 
 ## Intro 
 
-Continuous Integration (CI) and Continuous Delivery (CD) are hot topics right now as so many organizations move to the DevOps model of software development.  
+Continuous Integration (CI) and Continuous Delivery (CD) are hot topics right now as so many organizations move to the DevOps model of software development. 
+
 <!-- CK Question. Sometimes CD is Continuous Deployment, right? Do you want to acknowledge that. Like: You may see CD defined as continuous deployment...in this case, I am defining it as ... bla bla. Also I think you need to define CI/CD. OR are the only people reading this coming from Udacity, in which case they will know what CI CD is -->
 
 
@@ -16,35 +17,35 @@ There is an [ever growing list](https://landscape.cncf.io/card-mode?category=con
 
 ### [Argo CD](https://argoproj.github.io/)
 
-Argo is built around splitting CI from CD but only supporting the deployment of already built applications. It has a variety of ways to trigger deployments from your CI system as well as monitoring when the application definitions themselves change in git. 
+Argo is built around splitting CD from CI by focusing on the deployment of already built applications into a Kubernetes cluster. It has a variety of ways to trigger deployments from your CI system as well as monitoring when the declarative definitions themselves change in git. 
 
-<!--CK - they describe it as Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. So it seems like pooint out that it's for Kubernetes is important...or is thsht assumed? I think the description needs to be beefed up... see here https://argoproj.github.io/argo-cd/-- also here is how we have described it before; Argo CD — A GitOps tool that allows you to maintain state of your Kubernetes resources within Git. Argo CD automatically syncs your Kubernetes resources with what is in your Git repository, while also ensuring manual changes made to manifests within the cluster will be automatically reverted. This ensures your declarative deployment model.
+It also comes with some pretty nice visualizations of the components being deployed and shows how they change over time. 
 
-It also comes with some pretty nice visualizations of the components being deployed and shows how they change over time.
-
-### Jenkins X
+### [Jenkins X](https://jenkins-x.io)
 
 
-Jenikins X is a fully featured GitOps solution that requires developers to know less about Kubernetes that other options. It's actually built on top of Tekton (below) and adds a ton of usability enhancements and abstractions to the pipelines. <!--add in more from https://jenkins-x.io/v3/about/what/-->
+Jenkins X is a fully featured GitOps solution that requires developers to know less about Kubernetes than other options. It's built on top of Tekton (below) and adds a ton of usability enhancements and abstractions to the pipelines. 
 
-### GitLab CI CD <!--from what I see this is called GitLab Ci/CD -->
+It's focus is on removing complexity while still allowing for insight into how the system is working.
+
+### [GitLab CI/CD](https://docs.gitlab.com/ee/ci/)
 
 As part of their full setup, GitLab offers an integrated and easy way to automate pipelines directly from a project's GitLab repo. Pipelines are tied to the repositories themselves and can be extended to make developer's lives easier with CD options like Argo CD. 
 
 If you are using GitLab, definitely check this out!
 
-### Tekton
+### [Tekton](https://tekton.dev)
 
 Tekton is becoming the go-to for other projects to build on. It uses [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to provide an expressive way to build pipeline definitions with the existing RBAC in Kubernetes. 
 
 One major distinction is that pipelines are built outside of the project's git. This allows for a way to reuse portions of pipelines across any and all projects.  
 
 
-### Spinnaker
+### [Spinnaker](https://spinnaker.io/)
 
 Spinnaker is a continuous deployment specific option from Netflix. As such, it is optimized for huge deployments. It gives a lot of control over deployment strategies to allow for safer rolling deployments with many places for customization.
 
-### Drone
+### [Drone](https://www.drone.io)
 
 Drone gives you a way (similar to CircleCI or GitLab CI CD) to create full pipelines in a configuration in git with your application code. It supports several git providers, giving you flexibility in where you store your code (something that GitLab CI CD and Github Actions obviously don't allow). 
 
