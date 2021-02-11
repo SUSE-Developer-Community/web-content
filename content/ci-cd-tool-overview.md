@@ -6,9 +6,18 @@ draft: true
 
 ## Intro 
 
-Continuous Integration (CI) and Continuous Delivery (CD) are hot topics right now as so many organizations move to the DevOps model of software development. 
+Continuous Integration (CI) and Continuous Delivery or Deployment (CD) are hot topics right now as so many organizations move to the DevOps model of software development. 
 
-<!-- CK Question. Sometimes CD is Continuous Deployment, right? Do you want to acknowledge that. Like: You may see CD defined as continuous deployment...in this case, I am defining it as ... bla bla. Also I think you need to define CI/CD. OR are the only people reading this coming from Udacity, in which case they will know what CI CD is -->
+We normally talked about the process as a whole but each term can be thought of separately:
+
+- Continuous Integration: All of code changes get merged into the main git branch with minimal delay
+- Continuous Delivery: Instead of releasing on a cadence, every build that passes tests gets pushed out
+- Continuous Deployment: Expands the delivery into having the builds that pass being deployed automatically (and rolled back automatically when needed)
+
+
+All together, we can gain a substantial amount of of agile to our teams. By keeping changes as small as possible, there's less risk overall and any bugs can be found sooner. Also, with the right automation (or augmentation), we can focus more on delivering value instead of "babysitting" builds.
+
+With all of this additional complexity to the development process, we really need to automate massive chunks of the work. It would otherwise be too hard to do all of the steps manually.
 
 
 ## Options
