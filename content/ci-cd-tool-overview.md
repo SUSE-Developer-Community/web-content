@@ -8,16 +8,16 @@ draft: true
 
 Continuous Integration (CI) and Continuous Delivery or Deployment (CD) are hot topics right now as so many organizations move to the DevOps model of software development. 
 
-We normally talked about the process as a whole but each term can be thought of separately:
+We normally talk about the process as a whole, but each term can be thought of separately:
 
 - Continuous Integration: All of code changes get merged into the main git branch with minimal delay
 - Continuous Delivery: Instead of releasing on a cadence, every build that passes tests gets pushed out
 - Continuous Deployment: Expands the delivery into having the builds that pass being deployed automatically (and rolled back automatically when needed)
 
 
-All together, we can gain a substantial amount of of agile to our teams. By keeping changes as small as possible, there's less risk overall and any bugs can be found sooner. Also, with the right automation (or augmentation), we can focus more on delivering value instead of "babysitting" builds.
+All together, we can gain a substantial amount of of agile to our teams. <!-- something wrong in this sentence...do you mean out of? --> By keeping changes as small as possible, there's less risk overall and any bugs can be found sooner. Also, with the right automation (or augmentation), we can focus more on delivering value instead of "babysitting" builds.
 
-With all of this additional complexity to the development process, we really need to automate massive chunks of the work. It would otherwise be too hard to do all of the steps manually.
+With all of this additional complexity in the development process, we really need to automate massive chunks of the work. It would otherwise be too hard to do all of the steps manually.
 
 
 ## Options
@@ -56,13 +56,13 @@ Spinnaker is a continuous deployment specific option from Netflix. As such, it i
 
 ### [Drone](https://www.drone.io)
 
-Drone gives you a way (similar to CircleCI or GitLab CI CD) to create full pipelines in a configuration in git with your application code. It supports several git providers, giving you flexibility in where you store your code (something that GitLab CI CD and Github Actions obviously don't allow). 
+Drone gives you a way (similar to CircleCI or GitLab CI/CD) to create full pipelines in a configuration in git with your application code. It supports several git providers, giving you flexibility in where you store your code (something that GitLab CI/CD and Github Actions obviously don't allow). 
 
 
 
 ## How Do I Choose?
 
-As with any infrastructure choice, there are tradeoffs. In CI/CD, they are based around power versus usability; complete CI/CD versus CD specific; pipelines coupled with code versus higher order abstractions, etc.
+As with any infrastructure choice, there are tradeoffs. In CI/CD, they are based around power versus usability, complete CI/CD versus CD specific, pipelines coupled with code versus higher order abstractions, etc.
 
 You can make most of these options do what you need. But obviously you'll get more out of the tool if it's used in conjunction with processes and architectures that work in the same way the creators intended! Definitely try out a few and match them up with how you think about building applications to give the best experience.
 
