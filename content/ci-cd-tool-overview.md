@@ -15,7 +15,7 @@ We normally talk about the process as a whole, but each term can be thought of s
 - Continuous Deployment: Expands the delivery into having the builds that pass being deployed automatically (and rolled back automatically when needed)
 
 
-All together, we can gain a substantial amount of of agile to our teams. <!-- something wrong in this sentence...do you mean out of? --> By keeping changes as small as possible, there's less risk overall and any bugs can be found sooner. Also, with the right automation (or augmentation), we can focus more on delivering value instead of "babysitting" builds.
+All together, we can gain a substantial amount of agility in our teams. By keeping changes as small as possible, there's less risk overall and any bugs can be found sooner. Also, with the right automation (or augmentation), we can focus more on delivering value instead of "babysitting" builds.
 
 With all of this additional complexity in the development process, we really need to automate massive chunks of the work. It would otherwise be too hard to do all of the steps manually.
 
