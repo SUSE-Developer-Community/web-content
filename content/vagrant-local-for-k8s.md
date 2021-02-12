@@ -1,4 +1,4 @@
-# Vagrant never gets old 
+# Vagrant Never Gets Old 
 
 Let's face it -- Vagrant is not exactly a shiny new object. In fact, it's so not new that there are few recent articles providing an entry-level overview as well as important tips and tricks. So what's the point in writing about Vagrant in 2021? 
 
