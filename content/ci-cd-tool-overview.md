@@ -26,39 +26,47 @@ There is an [ever growing list](https://landscape.cncf.io/card-mode?category=con
 
 ### [Argo CD](https://argoproj.github.io/)
 
-Argo is built around splitting CD from CI by focusing on the deployment of already built applications into a Kubernetes cluster. It has a variety of ways to trigger deployments from your CI system as well as monitoring when the declarative definitions themselves change in git. 
+Argo CD is built around splitting CD from CI by focusing on the deployment of already built applications into a Kubernetes cluster. It has a variety of ways to trigger deployments from your CI system as well as monitoring when the declarative definitions themselves change in git. 
 
-It also comes with some pretty nice visualizations of the components being deployed and shows how they change over time. 
+It also comes with some nice visualizations of the components being deployed and shows how they change over time. 
+
+Argo is likely the right choice for projects where having the CI portion of your pipeline decoupled is useful.
 
 ### [Jenkins X](https://jenkins-x.io)
 
 
 Jenkins X is a fully featured GitOps solution that requires developers to know less about Kubernetes than other options. It's built on top of Tekton (below) and adds a ton of usability enhancements and abstractions to the pipelines. 
 
-It's focus is on removing complexity while still allowing for insight into how the system is working.
+It's focus is on removing complexity while still allowing for insight into how the system is working. If you want a fully featured pipeline on premise, Jenkins X should be on your short list to try.
 
 ### [GitLab CI/CD](https://docs.gitlab.com/ee/ci/)
 
 As part of their full setup, GitLab offers an integrated and easy way to automate pipelines directly from a project's GitLab repo. Pipelines are tied to the repositories themselves and can be extended to make developer's lives easier with CD options like Argo CD. 
 
-If you are using GitLab, definitely check this out!
+There is also their Auto DevOps offering that will make your pipelines act like a PaaS of sorts by building and deploying the containers in an easy to configure way. 
+
+If you are using GitLab, definitely check this out! 
 
 ### [Tekton](https://tekton.dev)
 
 Tekton is becoming the go-to for other projects to build on. It uses [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to provide an expressive way to build pipeline definitions with the existing RBAC in Kubernetes. 
 
-One major distinction is that pipelines are built outside of the project's git. This allows for a way to reuse portions of pipelines across any and all projects.  
+One major distinction is that pipelines are built outside of the project's git. This allows for a way to reuse portions of pipelines across any and all projects.
+
+If you are looking for a way to write abstract pipelines that can be reused in different projects, Tekton might be your best bet!
 
 
 ### [Spinnaker](https://spinnaker.io/)
 
 Spinnaker is a continuous deployment specific option from Netflix. As such, it is optimized for huge deployments. It gives a lot of control over deployment strategies to allow for safer rolling deployments with many places for customization.
 
+It's designed around sane defaults and best practices and would be a good choice for larger organizations that have a ton of different applications working together.
+
 ### [Drone](https://www.drone.io)
 
 Drone gives you a way (similar to CircleCI or GitLab CI/CD) to create full pipelines in a configuration in git with your application code. It supports several git providers, giving you flexibility in where you store your code (something that GitLab CI/CD and Github Actions obviously don't allow). 
 
-
+On this list, Drone is likely the simplest option to use. This simplicity makes it a good choice for people that are working by themselves or working on a small team!
 
 ## How Do I Choose?
 
