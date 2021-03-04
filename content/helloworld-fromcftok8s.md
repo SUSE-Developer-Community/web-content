@@ -188,17 +188,19 @@ instead.
 
 # Step 3: Making it Reachable
 
-Now my container is running on Kubernetes, but how do I talk to it? In Cloud Foundry, each app automatically gets a [route](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html), which is an external http endpoint that hits the default route specified by my app. If I don't specify it, CF assigns a so-called random route. Every app in CF has a route, unless you actively make sure it doesn't get one. Yes, there are cases where that makes sense but that's off topic. 
+Now my container is running on Kubernetes, but how do I talk to it? In Cloud Foundry, each app automatically gets a [route](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html), which is an external http endpoint that hits the default route specified by my app. If I don't specify it, CF assigns a so-called random route when I push my app for the first time. Every app in CF has a route, unless you actively make sure it doesn't get one. Yes, there are cases where that makes sense but that's off topic for now. 
 
-In Kubernetes, things are a bit more complicated. The Kubernetes deployment resource I used above doesn't care about making things reachable from the outside world - it cares about deploying stuff. As a result, the port exposed by the container (the one I specified in the Dockerfile) is only reachable from *within* the cluster - other containers and other pods can (theoretically) use it to talk to my app, but nobody else. Is is, however, not a good idea to do it this way either, since pods are ephemeral - they come and go. One key assumption Kubernetes makes about containers is that they die and have to be re-created all the time - as we all know, developers can't be trusted, right? So the deployment's main concern is to make sure that the actual state of the deployment matches the wanted state expressed by its yaml specification. If a container dies, it will re-create it (well, in fact, that's what the underlying ReplicaSet does, but hey). 
+In Kubernetes, things are a bit more complicated. The Kubernetes deployment resource I used above doesn't care about making things reachable from the outside world - it cares about deploying stuff and making sure that the actual state of the deployment matches the wanted state expressed by it's yaml specification. Nothing else. As a result, the port exposed by the container (the one I specified in the Dockerfile) is only reachable from *within* the cluster - other containers and other pods can (theoretically) use it to talk to my app, but nobody else. 
+
+Btw, a good article that helped me wrap my head around all this is ["Kubernetes Ingress for Beginners"](https://thenewstack.io/kubernetes-ingress-for-beginners/) by Nick Ramirez. Thanks Nick!
+
+As an aside, it is not a good idea to do it this way either, since pods are ephemeral - they come and go. One key assumption Kubernetes makes about containers is that they die and have to be re-created all the time - as we all know, developers can't be trusted, right? o the deployment's main concern is to make sure that the actual state of the deployment matches the wanted state expressed by its yaml specification. If a container dies, it will recreate it (well, in fact that's what the underlying ReplicaSet does but hey).
 
 Fair enough, so what else have we got? 
 
 The first thing you'll run across in many examples is the concept of a Kubernetes *Service*. The [Kubernetes documentation on Services](https://kubernetes.io/docs/concepts/services-networking/service/) says a Service is "an abstract way to expose an application running on a set of Pods as a network service." The key idea of a Service is that it hides the ephemeral nature of a pod - no matter how often pods get restarted or scaled up and down, the service endpoint remains accessible and doesn't change. It also performs basic (round-robin) load balancing, i.e. it makes sure that incoming requests are distributed evenly across a number of identical containers in a pod or a set of pods in a ReplicaSet. 
 
 So is a Service the Kubernetes counterpart of a Cloud Foundry application route? Not necessarily, since there are different service types you can specify. To make our service externally reachable, we need to make it be of the type "NodePort." This essentially makes Kubernetes assign a random TCP port in the port range between 30000 and 32767 and makes this port reachable outside the cluster. There's another Service type called "LoadBalancer" which essentially implements the service by requesting a load balancer resource from the underlying cloud provider - but let's leave that aside for now. 
-
-Btw, a good article that helped me wrap my head around all this is ["Kubernetes Ingress for Beginners"](https://thenewstack.io/kubernetes-ingress-for-beginners/) by Nick Ramirez. 
 
 To create a service of type "NodePort" for my hello world app I just run
 
@@ -259,4 +261,4 @@ And now, finally, we are back to where we started. What a journey. All just to r
 
 Am I the first one to note that there's a bit of a complexity problem here? Not at all. If there's one thing that's certain, when something looks like a really good idea, most of the time someone else has already thought of it. Same here. There are tons of tools out there that try to make things simpler for developers when developing apps that only run properly once deployed to Kubernetes. More on that in a future post: stay tuned. 
 
-If you've made it this far, thank you very much for bearing with me. Remember, the only stupid question is the unasked one. Everybody else is just Googling for stuff, just like you are. 
+If you've made it this far, thank you very much for bearing with me. Remember, the only stupid question is the unasked one. Everybody else is just Googling for stuff too. 
