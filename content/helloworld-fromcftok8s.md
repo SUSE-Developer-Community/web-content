@@ -235,7 +235,7 @@ Now I can curl my Kubernetes VM's external IP address on port 80 and see the ind
 ```
 Close but no cigar yet - I don't have a an actual domain name for my app like I used to have in Cloud Foundry. 
 
-To get things lifted up to the level of domains and hostnames as opposed to IP addresses and ports, I need yet another Kubernetes resource, called Ingress. An Ingress basically specifies how incoming requests should be routed to services. For example, if your app consists of multiple services, you can use an ingress to make sure requests to http://my-app.my-domain/service1 go to service 1, and http://my-app.my-domain/service2 go to service 2.  
+To get things lifted up to the level of domains and hostnames as opposed to IP addresses and ports, I need yet another Kubernetes resource, called Ingress. An Ingress basically specifies how incoming requests should be routed to services. For example, if your app consists of multiple services, you can use an ingress to make sure requests to http://my-app.my-domain/service1 go to service 1 and http://my-app.my-domain/service2 go to service 2.  
 
 For the simple hello world example we're discussing here, it's easy to define an Ingress that does the job of assigning a domain name to my app:
 
