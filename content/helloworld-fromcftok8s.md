@@ -111,7 +111,7 @@ TODO: explain tags and docker hub repositories a bit more
     > docker tag 9f5e24e9052a timirnich/timhelloworld:latest
 ```
 
-Finally, I was pushed the image to my personal docker hub account. 
+Finally, I  pushed the image to my personal Docker Hub account. 
 
 ```
     > docker push timirnich/timhelloworld:latest
