@@ -125,7 +125,7 @@ Now that I had a container image built and uploaded to a place Kubernetes access
 
 The first thing I ran into was a concept called "pods." According to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/), a pod is "a group of one or more containers, with shared storage/network resources, and a specification for how to run the containers." Sounds about right for what I'm trying to do, doesn't it? However, the documentation also said I shouldn't be using pods, since, in a nutshell, I would be missing out on what Kubernetes is all about - making sure that my app is always available even when something goes wrong (e.g. a container dies). Not that resilience would be of any importance to my use case here. So, let's figure out the proper way. 
 
-The documentation, as well as many of the examples I found, suggested the use of a resource called "Deployment." Citing the [Kubernetes documentation for Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) again, a Deployment "provides declarative updates for Pods and ReplicaSets." What?
+The documentation, as well as many examples, suggested I use a resource called "Deployment." Citing the [Kubernetes documentation for Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) again, a Deployment "provides declarative updates for Pods and ReplicaSets." What?
 
 In dramatically simplified terms, the point of a Deployment is to provide control over the process of updating a number of replicated instances of a container or a set of containers. 
 
