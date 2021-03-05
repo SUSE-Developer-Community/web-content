@@ -119,7 +119,7 @@ Finally, I  pushed the image to my personal Docker Hub account.
 
 # Step 2: Deploying to Kubernetes
 
-Now that I had a container image built and uploaded to a place Kubernetes access it, I had to  work out how to tell Kubernetes what to do. With Cloud Foundry, what I'm used to doing is writing a manifest.yaml. With Kubernetes, things are a little more complex. Ok, that was an understatement. Things are way more complex. 
+Now that I had a container image built and uploaded to a place Kubernetes could access it, I had to work out how to tell Kubernetes what to do. With Cloud Foundry, what I'm used to doing is writing a manifest.yaml. With Kubernetes, things are a little more complex. Ok, that was an understatement. Things are way more complex. 
 
 ## Choosing the Right Workload Resource: Pod, ReplicaSet or Deployment?
 
