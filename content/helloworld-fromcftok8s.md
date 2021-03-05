@@ -194,7 +194,7 @@ In Kubernetes, things are a bit more complicated. The Kubernetes deployment reso
 
 Btw, a good article that helped me wrap my head around all this is ["Kubernetes Ingress for Beginners"](https://thenewstack.io/kubernetes-ingress-for-beginners/) by Nick Ramirez. Thanks Nick!
 
-As an aside, it is not a good idea to do it this way either, since pods are ephemeral - they come and go. One key assumption Kubernetes makes about containers is that they die and have to be re-created all the time - as we all know, developers can't be trusted, right? o the deployment's main concern is to make sure that the actual state of the deployment matches the wanted state expressed by its yaml specification. If a container dies, it will recreate it (well, in fact that's what the underlying ReplicaSet does but hey).
+As an aside, it is not a good idea to do it this way either, since pods are ephemeral - they come and go. One key assumption Kubernetes makes about containers is that they die and have to be re-created all the time - as we all know, developers can't be trusted, right? The deployment's main concern is to make sure that the actual state of the deployment matches the wanted state expressed by its yaml specification. If a container dies, it will re-create it  (well, in fact, that's what the underlying ReplicaSet does, but hey).
 
 Fair enough, so what else have we got? 
 
