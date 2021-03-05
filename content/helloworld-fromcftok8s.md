@@ -46,7 +46,7 @@ So I just went to [Docker Hub](http://hub.docker.com) and searched for "Python".
 
 Later I found this nice [article](https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d) explaining what the different tag names on Docker Hub mean, which would have helped me a ton at the time. (Spoiler alert: most of them refer to Debian releases the respective images are based on.) 
 
-## Building the image
+## Building the Image
 
 Next, I needed to make sure I had all the Python packages required by my application were installed, so I told Docker to copy my requirements.txt into the container and run `pip install`. 
 
