@@ -1,14 +1,14 @@
 # Handling multiple (local) Kubernetes clusters
 
-When you start working with Kubernetes, you will sooner or later end up with multiple k8s clusters that you need to interact with. Promise. The good news is, kubectl, the Kubernetes Command Line Interface (CLI) client, has built-in support for multiple clusters. There is however a couple of things you should know, a number of traps that you might want to avoid, and a number of tools you will want to adopt early on in your Kubernetes journey. Investing time to wrap your head around these things early on will save you a lot of time and hassle. 
+When you start working with Kubernetes, you will sooner or later end up with multiple k8s clusters that you need to interact with. Promise. The good news is, kubectl, the Kubernetes Command Line Interface (CLI) client, has built-in support for multiple clusters. There is however a couple of things you should know, a number of traps that you might want to avoid, and a number of tools you will want to adopt early on in your Kubernetes journey. Investing time to wrap your head around these things will save you a lot of time and hassle. 
 
-As usual, all of this info can be found somewhere else. But it is spread out in a number of places, which makes it a bit challenging to figure things out - particularly when you're new to the Kubernetes world. So I've collected (hopefully) all relevant information here and put it into a nice logical order - you're welcome.  
+Now, this is certainly not a new topic, and all of this info can be found somewhere else. But it is spread out in a number of places, which makes it a bit challenging to figure things out - particularly when you're new to the Kubernetes world. So collecting (hopefully) all relevant information in one place and putting it into a logical order seemed useful.  
 
 ## Kubernetes configuration files and context switching
 
-Before we start discussing multiple clusters, let's take a brief look at how kubectl finds out how to talk to a particular Kubernetes cluster. The key mechanism is the use of configuration files, called _kubeconfig files_. By default, kubectl will use information from the file `$HOME/.kube/config`. It is possible to point to other config files by setting the `KUBECONFIG` environment variable or by using the `--kubeconfig` flag. 
+Before we start discussing multiple clusters, let's take a brief look at how kubectl finds out how to talk to a particular Kubernetes cluster. By the way, if you're looking for a general introduction to kubectl, have a look at [this tutorial](https://rancher.com/learning-paths/how-to-manage-kubernetes-with-kubectl/) by Kelly Griffin. 
 
-There are three components in a kubeconfig file:
+The most widely used mechanism to find cluster access information re so-called _kubeconfig files_. By default, kubectl will use information from the file `$HOME/.kube/config`. It is possible to point to other config files by setting the `KUBECONFIG` environment variable or by using the `--kubeconfig` flag. There are three components in a kubeconfig file:
 * clusters: describes your - you guessed it - clusters, i.e. specifies name, API server URL and certificate authority. 
 * users: the user credentials needed to authenticate to your cluster(s), i.e. name and either key pairs or username/password pairs
 * context: a combination of cluster, user and namespace to exactly define the target for your subsequent kubectl operations. Even if you only have one cluster, you can either have multiple users or different namespaces to work with, so the context construct makes it easier to switch between your most frequently used combinations. 
@@ -26,10 +26,10 @@ Theoretically, this could be the end of the article, if it wasn't for the fact t
 
 ## Multiple config files
 
-As your number of clusters grows, a better way is to keep information about different clusters in different config files - trust me. There's basically two ways to handle multiple config files: the stupid way and the clever way. The stupid way is you manually specify the config you want to use each time you call kubectl via the --kubeconfig flag. The clever way is to concatenate multiple kubeconfigs into your KUBECONFIG environment variable. On Linux and Mac, the list is delimited by a colon, while for Windows you'll use a semicolon. 
+A better way is to keep information about different clusters in different config files. There's basically two ways to handle multiple config files: the simple way and the clever way. The simple way is you manually specify the config you want to use each time you call kubectl via the `--kubeconfig` flag. The clever way is to concatenate multiple kubeconfigs into your `KUBECONFIG` environment variable. On Linux and Mac, the list is delimited by a colon, while for Windows you'll use a semicolon. 
 
 The rules according to which kubectl identifies its valid configuration data from this list of files are described in detail in the [Kubernetes documentation]{https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/}, but here's the 10000 m summary:
-* Files specified via --kubeconfig always win
+* Files specified via --kubeconfig always win, no matter what's in your 
 * The content of all configs specified in $KUBECONFIG is merged
 * The first file to set a value or map key wins
 * Never change a value or map key. Even if a later occurrence has non-conflicting values, discard that info
@@ -67,3 +67,5 @@ https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-mul
 Talk about k9s, KUI?
 
 Talk about version mismatch in practice, multiple versions of kubectl?
+
+TODO: add a CTA to check out other resources and join the community. 
