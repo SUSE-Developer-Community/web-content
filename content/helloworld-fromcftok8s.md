@@ -105,8 +105,6 @@ The next step was to build the container by running "docker build" in the app di
 
 Then it was time to upload the container to Docker Hub. First I had to give it an official name, a so-called "tag." 
 
-TODO: explain tags and docker hub repositories a bit more
-
 ```
     > docker tag 9f5e24e9052a timirnich/timhelloworld:latest
 ```
@@ -175,8 +173,6 @@ Now I can deploy this with
 ```
     > kubectl apply -f timhelloworld.yaml
 ```
-
-TODO: Show the result. 
 
 While I could have run the create command directly, the advantage of doing it this way is that I now have a file on my local disk that I can use to make changes to the deployment easily. For example, if I wanted to pin the container image to a specific version, I could just do
 
