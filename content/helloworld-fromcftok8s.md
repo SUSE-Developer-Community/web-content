@@ -258,3 +258,5 @@ And now, finally, we are back to where we started. What a journey. All just to r
 Am I the first one to note that there's a bit of a complexity problem here? Not at all. If there's one thing that's certain, when something looks like a really good idea, most of the time someone else has already thought of it. Same here. There are tons of tools out there that try to make things simpler for developers when developing apps that only run properly once deployed to Kubernetes. More on that in a future post: stay tuned. 
 
 If you've made it this far, thank you very much for bearing with me. Remember, the only stupid question is the unasked one. Everybody else is just Googling for stuff too. 
+
+Do you still remember how long it took you to deploy something to Kubernetes the first time? Come join us in the [SUSE & Rancher Community](https://community.suse.com) and share your story! There's lots of useful resources, events, trainings and, most importantly, nice people sharing your interests to be found there...
