@@ -2,7 +2,7 @@
 
 When you start working with Kubernetes, sooner or later you'll end up with multiple clusters that you need to interact with. Promise. The good news is, kubectl, the Kubernetes Command Line Interface (CLI) client, has built-in support for multiple clusters. There are, however, a couple of things you should know, a number of traps to avoid and several tools you'll want to adopt early on in your Kubernetes journey. Investing time to wrap your head around these things will save you a lot of time and hassle. 
 
-Now, this is certainly not a new topic, and all of this info can be found somewhere else. But it is spread out in a number of places, which makes it a bit challenging to figure things out - particularly when you're new to the Kubernetes world. So collecting (hopefully) all relevant information in one place and putting it into a logical order seemed useful.  
+Now, this is certainly not a new topic, and all of this info can be found somewhere else. But it is spread out in a number of places, which makes it challenging to figure things out - particularly when you're new to Kubernetes. So collecting (hopefully) all relevant information in one place and putting it into a logical order seems useful.  
 
 ## Kubernetes configuration files and context switching
 
