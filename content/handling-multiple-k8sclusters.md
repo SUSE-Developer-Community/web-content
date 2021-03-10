@@ -1,4 +1,4 @@
-# Handling multiple (local) Kubernetes clusters
+# Handling Multiple (Local) Kubernetes Clusters
 
 When you start working with Kubernetes, you will sooner or later end up with multiple k8s clusters that you need to interact with. Promise. The good news is, kubectl, the Kubernetes Command Line Interface (CLI) client, has built-in support for multiple clusters. There is however a couple of things you should know, a number of traps that you might want to avoid, and a number of tools you will want to adopt early on in your Kubernetes journey. Investing time to wrap your head around these things will save you a lot of time and hassle. 
 
