@@ -66,7 +66,7 @@ The first tool that I want to call out is Ahmet Balkan's kubectx and its brother
 
 Another trick many Kubernetes people use is to display current cluster and namespace your command line prompt. You might think this is unnecessary, but wait until you accidentally delete a pod from the wrong namespace. If you are using bash or zsh (the default shell on MacOS), you can simply use [https://github.com/jonmosco/kube-ps1](https://github.com/jonmosco/kube-ps1). You can install it via your favorite package manager, and you'll have to add a few lines to your .bashrc or .zshrc. The process is described well in the repository's readme. If you're using [fish](https://fishshell.com), you may want to take a look at [https://github.com/aluxian/fish-kube-prompt] for the same purpose (tip: have a look at [fisher](https://github.com/jorgebucaran/fisher) to manage your fish extensions). Both prompt mods can be turned on and off easily with `kubeon|kubeoff` for kube-ps1 and `kube_ps on|off` for fish-kube-prompt. 
 
-When you're multitasking between multiple development projects, a handy way to point to your current cluster based on the directory you're in is a tool called `direnv`, see [https://direnv.net]. 
+When you're multitasking between multiple development projects, a tool called `direnv` is a handy way to point to your current cluster based on the directory you're in ( see [https://direnv.net]). 
 
 What's your favorite tool or trick for handling multiple k8s clusters? Hop over to the [SUSE & Rancher Community](https://community.suse.com) and join the [discussion](https://community.suse.com/link-to-crosspost)!
 
