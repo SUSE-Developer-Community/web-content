@@ -6,7 +6,7 @@ Now, this is certainly not a new topic, and all of this info can be found somewh
 
 ## Kubernetes Configuration Files and Context Switching
 
-Before we start discussing multiple clusters, let's take a brief look at how kubectl finds out how to talk to a particular Kubernetes cluster. By the way, if you're looking for a general introduction to kubectl, have a look at [this tutorial](https://rancher.com/learning-paths/how-to-manage-kubernetes-with-kubectl/) by Kelly Griffin. 
+Before we discuss multiple clusters, let's take a brief look at how kubectl finds out how to talk to a particular Kubernetes cluster. By the way, if you're looking for a general introduction to kubectl, have a look at [this tutorial](https://rancher.com/learning-paths/how-to-manage-kubernetes-with-kubectl/) by Kelly Griffin. 
 
 The most widely used mechanism to find cluster access information are so-called _kubeconfig files_. By default, kubectl will use information from the file `$HOME/.kube/config`. It is possible to point to other config files by setting the `KUBECONFIG` environment variable or by using the `--kubeconfig` flag. There are three main components in a kubeconfig file:
 * clusters: describes your - you guessed it - clusters, i.e. specifies name, API server URL and certificate authority. 
