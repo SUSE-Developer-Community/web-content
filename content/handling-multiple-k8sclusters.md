@@ -4,7 +4,7 @@ When you start working with Kubernetes, sooner or later you'll end up with multi
 
 Now, this is certainly not a new topic, and all of this info can be found somewhere else. But it is spread out in a number of places, which makes it challenging to figure things out - particularly when you're new to Kubernetes. So collecting (hopefully) all relevant information in one place and putting it into a logical order seems useful.  
 
-## Kubernetes configuration files and context switching
+## Kubernetes Configuration Files and Context Switching
 
 Before we start discussing multiple clusters, let's take a brief look at how kubectl finds out how to talk to a particular Kubernetes cluster. By the way, if you're looking for a general introduction to kubectl, have a look at [this tutorial](https://rancher.com/learning-paths/how-to-manage-kubernetes-with-kubectl/) by Kelly Griffin. 
 
