@@ -68,6 +68,6 @@ Another trick many Kubernetes people use is to display current cluster and names
 
 When you're multitasking between multiple development projects, a tool called `direnv` is a handy way to point to your current cluster based on the directory you're in ( see [https://direnv.net]). 
 
-What's your favorite tool or trick for handling multiple k8s clusters? Hop over to the [SUSE & Rancher Community](https://community.suse.com) and join the [discussion](https://community.suse.com/link-to-crosspost)!
+What's your favorite tool or trick for handling multiple K8s clusters? Hop over to the [SUSE & Rancher Community](https://community.suse.com) and join the [discussion](https://community.suse.com/link-to-crosspost)!
 
 TODO: update this with a link to the cross-post in MN once published. 
