@@ -22,7 +22,7 @@ If you want to use Vagrant with a Hypervisor that is not installed by default, y
 
 ### Spinning up your first Vagrant box
 
-To get going with a fresh new Vagrant box, you need to run vagrant init in an empty directory. There's always one Vagrant box per directory. After vagrant init, you'll have a default Vagrantfile in that directory, which you can take as the starting point. You can of course simply overwrite this if you already have a working configuration somewhere else. 
+To get going with a fresh new Vagrant box, you need to run `vagrant init` in an empty directory. There's always one Vagrant box per directory. After vagrant init, you'll have a default Vagrantfile in that directory, which you can take as the starting point. You can of course simply overwrite this if you already have a working configuration somewhere else. 
 
 Let's take a look at this file to see what's there. Note that I've trimmed away some of the comments since Vagrant tries to be _very_ self-explanatory. And I'm the one doing the explaining here. A side note: the default Vagrant file does of course only contain the most common parameters. A complete reference can be found at [https://docs.vagrantup.com](https://docs.vagrantup.com).
 
@@ -143,7 +143,7 @@ Let's look at an example. One thing you'll want to do with any new VM you're spi
     cp /etc/rancher/k3s/k3s.yaml /vagrant/
   SHELL
 
-### Vagrant Cloud and a Few Tips for Choosing your Base Image
+## Vagrant Cloud and a Few Tips for Choosing your Base Image
 
 The base image you declare via `config.vm.box` in the vagrant file comes from a cloud service called [Vagrant Cloud](https://app.vagrantup.com/boxes/search). Essentially, Vagrant Cloud is to VMs what Docker Hub is to containers - a salad bowl of all sorts of VM images. Some of them are generic base boxes, while some are tailored toward specific use cases by means of specific configuration and selection (addition and removal) of software contained in the image. You'll find boxes containing the base operating systems of all major Linux distributions such as Ubuntu, CentOS and, of course, openSUSE. 
 
