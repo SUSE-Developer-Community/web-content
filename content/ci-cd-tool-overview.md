@@ -1,5 +1,5 @@
 ---
-title: "Overview of Ci/CD tools"
+title: "Overview of CI/CD tools"
 date: 2021-02-03
 draft: true
 ---
@@ -73,4 +73,3 @@ On this list, Drone is likely the simplest option to use. This simplicity makes 
 As with any infrastructure choice, there are tradeoffs. In CI/CD, they are based around power versus usability, complete CI/CD versus CD specific, pipelines coupled with code versus higher order abstractions, etc.
 
 You can make most of these options do what you need. But obviously you'll get more out of the tool if it's used in conjunction with processes and architectures that work in the same way the creators intended! Definitely try out a few and match them up with how you think about building applications to give the best experience.
-
